@@ -1,0 +1,15 @@
+# AnyRouter青龙签到脚本依赖
+# 安装命令: pip3 install -r requirements.txt
+
+# HTTP客户端，支持HTTP/2
+httpx[http2]>=0.24.0
+
+# 浏览器自动化工具，用于绕过WAF
+playwright>=1.40.0
+
+# 注意事项:
+# 1. 青龙面板需要先安装chromium浏览器
+# 2. 安装playwright后需要运行: playwright install chromium
+# 3. 如果青龙环境缺少系统依赖，可能需要手动安装以下包:
+#    - 对于Debian/Ubuntu: apt-get install -y libglib2.0-0 libnss3 libnspr4 libxss1 libdrm2 libgtk-3-0 libasound2
+#    - 对于CentOS/RHEL: yum install -y nss atk at-spi2-atk gtk3 cups-libs drm libXdamage libXrandr

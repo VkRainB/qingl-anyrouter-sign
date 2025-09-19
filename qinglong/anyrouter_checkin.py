@@ -82,7 +82,12 @@ async def get_waf_cookies_with_playwright(account_name: str):
                     '--no-sandbox',
                     '--disable-setuid-sandbox',
                     '--disable-gpu',
-                    '--disable-extensions'
+                    '--disable-extensions',
+                    '--disable-background-timer-throttling',
+                    '--disable-renderer-backgrounding',
+                    '--disable-backgrounding-occluded-windows',
+                    '--disable-ipc-flooding-protection',
+                    '--memory-pressure-off'
                 ]
             )
             
@@ -95,7 +100,7 @@ async def get_waf_cookies_with_playwright(account_name: str):
 
             ql_log('INFO', f'{account_name}: Step 1: Access login page to get initial cookies...')
 
-            await page.goto('https://anyrouter.top/login', wait_until='networkidle', timeout=30000)
+            await page.goto('https://anyrouter.top/login', wait_until='networkidle', timeout=60000)
 
             try:
                 await page.wait_for_function('document.readyState === "complete"', timeout=5000)
@@ -241,8 +246,8 @@ async def check_in_account(account_info, account_index):
 def send_notification(content):
     """发送青龙通知"""
     try:
-        from ql_notify import send_notification as ql_send
-        ql_send("AnyRouter签到结果", content)
+        from ql_notify import send_notification as notify_send
+        notify_send("AnyRouter签到结果", content)
     except ImportError:
         # 如果通知模块不可用，简单输出到控制台
         ql_log('INFO', 'Notification module not available, using console output')

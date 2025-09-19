@@ -201,4 +201,13 @@ notifier = QinglongNotifier()
 
 def send_notification(title: str, content: str):
     """发送通知的便捷函数"""
-    notifier.send_all(title, content)
+    try:
+        notifier.send_all(title, content)
+    except Exception as e:
+        # 如果通知发送失败，至少保证控制台输出
+        print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [ERROR] 通知发送失败: {e}")
+        print("\n" + "="*60)
+        print(f"📢 {title}")
+        print("="*60)
+        print(content)
+        print("="*60)
